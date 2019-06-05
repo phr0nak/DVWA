@@ -59,8 +59,8 @@ function &dvwaSessionGrab() {
 
 
 function dvwaPageStartup( $pActions ) {
-	if( in_array( 'authenticated', $pActions ) ) {
-		if( !dvwaIsLoggedIn()) {
+	if( in_array( 'unauthenticated', $pActions ) ) {
+		if( dvwaIsLoggedIn()) {
 			dvwaRedirect( DVWA_WEB_PAGE_TO_ROOT . 'login.php' );
 		}
 	}
@@ -184,7 +184,7 @@ function dvwaHtmlEcho( $pPage ) {
 	$menuBlocks = array();
 
 	$menuBlocks[ 'home' ] = array();
-	if( dvwaIsLoggedIn() ) {
+	if( !dvwaIsLoggedIn() ) {
 		$menuBlocks[ 'home' ][] = array( 'id' => 'home', 'name' => 'Home', 'url' => '.' );
 		$menuBlocks[ 'home' ][] = array( 'id' => 'instructions', 'name' => 'Instructions', 'url' => 'instructions.php' );
 		$menuBlocks[ 'home' ][] = array( 'id' => 'setup', 'name' => 'Setup / Reset DB', 'url' => 'setup.php' );
@@ -194,7 +194,7 @@ function dvwaHtmlEcho( $pPage ) {
 		$menuBlocks[ 'home' ][] = array( 'id' => 'instructions', 'name' => 'Instructions', 'url' => 'instructions.php' );
 	}
 
-	if( dvwaIsLoggedIn() ) {
+	if( !dvwaIsLoggedIn() ) {
 		$menuBlocks[ 'vulnerabilities' ] = array();
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'brute', 'name' => 'Brute Force', 'url' => 'vulnerabilities/brute/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'exec', 'name' => 'Command Injection', 'url' => 'vulnerabilities/exec/' );
